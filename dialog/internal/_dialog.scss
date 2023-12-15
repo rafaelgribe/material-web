@@ -119,13 +119,13 @@
   h2 {
     all: unset;
     align-self: stretch;
+    flex-grow: 1;
   }
 
   .headline {
     align-items: center;
     color: var(--_headline-color);
     display: flex;
-    flex-direction: column;
     font-family: var(--_headline-font);
     font-size: var(--_headline-size);
     line-height: var(--_headline-line-height);
@@ -133,34 +133,19 @@
     position: relative;
   }
 
-  slot[name='headline']::slotted(*) {
+  slot[name='headline']::slotted(*),
+  .close-button-container {
     align-items: center;
     align-self: stretch;
     box-sizing: border-box;
     display: flex;
     gap: 8px;
-    padding: 24px 24px 0;
+    justify-content: space-between;
+    padding: 32px 32px 0;
   }
 
-  .icon {
-    display: flex;
-  }
-
-  slot[name='icon']::slotted(*) {
-    color: var(--_icon-color);
-    fill: currentColor;
-    font-size: var(--_icon-size);
-    margin-top: 24px;
-    height: var(--_icon-size);
-    width: var(--_icon-size);
-  }
-
-  .has-icon slot[name='headline']::slotted(*) {
-    justify-content: center;
-    padding-top: 16px;
-  }
-
-  .scrollable slot[name='headline']::slotted(*) {
+  .scrollable slot[name='headline']::slotted(*),
+  .scrollable .close-button-container {
     padding-bottom: 16px;
   }
 
@@ -219,7 +204,7 @@
 
   slot[name='content']::slotted(*) {
     box-sizing: border-box;
-    padding: 24px;
+    padding: 32px;
   }
 
   // Anchors are used with an IntersectionObserver to determine when the content
@@ -238,6 +223,7 @@
 
   .actions {
     position: relative;
+    background-color: var(--_action-container-color);
   }
 
   slot[name='actions']::slotted(*) {
@@ -245,29 +231,7 @@
     display: flex;
     gap: 8px;
     justify-content: flex-end;
-    padding: 16px 24px 24px;
-  }
-
-  .has-actions slot[name='content']::slotted(*) {
-    padding-bottom: 8px;
-  }
-
-  md-divider {
-    display: none;
-    position: absolute;
-  }
-
-  .has-headline.show-top-divider .headline md-divider,
-  .has-actions.show-bottom-divider .actions md-divider {
-    display: flex;
-  }
-
-  .headline md-divider {
-    bottom: 0;
-  }
-
-  .actions md-divider {
-    top: 0;
+    padding: 24px 32px;
   }
 
   @media (forced-colors: active) {

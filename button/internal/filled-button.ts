@@ -6,15 +6,9 @@
 
 import '../../elevation/elevation.js';
 
-import {html} from 'lit';
-
 import {Button} from './button.js';
 
 /**
  * A filled button component.
  */
-export class FilledButton extends Button {
-  protected override renderElevationOrOutline() {
-    return html`<md-elevation></md-elevation>`;
-  }
-}
+export class FilledButton extends Button {}

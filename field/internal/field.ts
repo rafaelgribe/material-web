@@ -43,6 +43,11 @@ export class Field extends LitElement {
    */
   @property({type: Boolean, attribute: 'has-end'}) hasEnd = false;
 
+  /**
+   * Whether or not the field has an icon that should look like it is part of the label.
+   */
+  @property({type: Boolean, attribute: 'has-icon-label'}) hasIconLabel = false;
+
   @queryAssignedElements({slot: 'aria-describedby'})
   private readonly slottedAriaDescribedBy!: HTMLElement[];
 
@@ -117,6 +122,7 @@ export class Field extends LitElement {
       'focused': this.focused,
       'with-start': this.hasStart,
       'with-end': this.hasEnd,
+      'with-icon-label': this.hasIconLabel,
       'populated': this.populated,
       'resizable': this.resizable,
       'required': this.required,

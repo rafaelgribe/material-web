@@ -1,5 +1,5 @@
 {
-  "name": "@material/web",
+  "name": "material-web-fork",
   "version": "1.0.1",
   "publishConfig": {
     "access": "public"

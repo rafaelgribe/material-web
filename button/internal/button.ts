@@ -147,7 +147,8 @@ export abstract class Button extends buttonBaseClass implements FormSubmitter {
       ?disabled=${this.disabled}
       aria-label="${ariaLabel || nothing}"
       aria-haspopup="${ariaHasPopup || nothing}"
-      aria-expanded="${ariaExpanded || nothing}">
+      aria-expanded="${ariaExpanded || nothing}"
+      part="button">
       ${this.renderContent()}
     </button>`;
   }
@@ -163,6 +164,7 @@ export abstract class Button extends buttonBaseClass implements FormSubmitter {
       aria-expanded="${ariaExpanded || nothing}"
       href=${this.href}
       target=${this.target || nothing}
+      part="link"
       >${this.renderContent()}
     </a>`;
   }

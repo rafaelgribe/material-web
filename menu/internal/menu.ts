@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * @license
  * Copyright 2023 Google LLC
@@ -466,7 +467,7 @@ export abstract class Menu extends LitElement {
         style=${styleMap(this.menuPositionController.surfaceStyles)}
         popover=${this.positioning === 'popover' ? 'manual' : nothing}>
         ${this.renderElevation()}
-        <div class="items">
+        <div class="items" part="items">
           <div class="item-padding"> ${this.renderMenuItems()} </div>
         </div>
       </div>

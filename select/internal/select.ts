@@ -149,6 +149,12 @@ export abstract class Select extends selectBaseClass {
   hasLeadingIcon = false;
 
   /**
+   * Whether or not the text field has a leading icon that is connected to the selected label.
+   */
+  @property({type: Boolean, attribute: 'has-icon-label-icon'})
+  hasIconLabel = false;
+
+  /**
    * Text to display in the field. Only set for SSR.
    */
   @property({attribute: 'display-text'}) displayText = '';
@@ -403,6 +409,7 @@ export abstract class Select extends selectBaseClass {
           .error=${this.hasError}
           ?has-start=${this.hasLeadingIcon}
           has-end
+          ?has-icon-label=${this.hasIconLabel}
           supporting-text=${this.supportingText}
           error-text=${this.getErrorText()}
           @keydown=${this.handleKeydown}

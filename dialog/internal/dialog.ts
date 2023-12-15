@@ -14,12 +14,7 @@ import {ARIAMixinStrict} from '../../internal/aria/aria.js';
 import {requestUpdateOnAriaChange} from '../../internal/aria/delegate.js';
 import {redispatchEvent} from '../../internal/controller/events.js';
 
-import {
-  DIALOG_DEFAULT_CLOSE_ANIMATION,
-  DIALOG_DEFAULT_OPEN_ANIMATION,
-  DialogAnimation,
-  DialogAnimationArgs,
-} from './animations.js';
+import {DIALOG_DEFAULT_CLOSE_ANIMATION, DIALOG_DEFAULT_OPEN_ANIMATION, DialogAnimation, DialogAnimationArgs} from './animations.js';
 
 /**
  * A dialog component.
@@ -80,6 +75,11 @@ export class Dialog extends LitElement {
   @property() type?: 'alert';
 
   /**
+   * If the dialog should have a close button.
+   */
+  @property({type: Boolean, attribute: 'has-close-button'}) hasCloseButton = true;
+
+  /**
    * Gets the opening animation for a dialog. Set to a new function to customize
    * the animation.
    */
@@ -112,7 +112,6 @@ export class Dialog extends LitElement {
   // Dialogs should not be SSR'd while open, so we can just use runtime checks.
   @state() private hasHeadline = false;
   @state() private hasActions = false;
-  @state() private hasIcon = false;
 
   constructor() {
     super();
@@ -144,9 +143,7 @@ export class Dialog extends LitElement {
       return;
     }
 
-    const preventOpen = !this.dispatchEvent(
-      new Event('open', {cancelable: true}),
-    );
+    const preventOpen = !this.dispatchEvent(new Event('open', {cancelable: true}));
     if (preventOpen) {
       this.open = false;
       return;
@@ -197,9 +194,7 @@ export class Dialog extends LitElement {
 
     const prevReturnValue = this.returnValue;
     this.returnValue = returnValue;
-    const preventClose = !this.dispatchEvent(
-      new Event('close', {cancelable: true}),
-    );
+    const preventClose = !this.dispatchEvent(new Event('close', {cancelable: true}));
     if (preventClose) {
       this.returnValue = prevReturnValue;
       return;
@@ -222,15 +217,11 @@ export class Dialog extends LitElement {
   }
 
   protected override render() {
-    const scrollable =
-      this.open && !(this.isAtScrollTop && this.isAtScrollBottom);
+    const scrollable = this.open && !(this.isAtScrollTop && this.isAtScrollBottom);
     const classes = {
       'has-headline': this.hasHeadline,
       'has-actions': this.hasActions,
-      'has-icon': this.hasIcon,
-      'scrollable': scrollable,
-      'show-top-divider': scrollable && !this.isAtScrollTop,
-      'show-bottom-divider': scrollable && !this.isAtScrollBottom,
+      'scrollable': scrollable
     };
 
     const {ariaLabel} = this as ARIAMixinStrict;
@@ -243,18 +234,16 @@ export class Dialog extends LitElement {
         role=${this.type === 'alert' ? 'alertdialog' : nothing}
         @cancel=${this.handleCancel}
         @click=${this.handleDialogClick}
-        .returnValue=${this.returnValue || nothing}>
+        .returnValue=${this.returnValue || nothing}
+      >
         <div class="container" @click=${this.handleContentClick}>
           <div class="headline">
-            <div class="icon" aria-hidden="true">
-              <slot name="icon" @slotchange=${this.handleIconChange}></slot>
-            </div>
             <h2 id="headline" aria-hidden=${!this.hasHeadline || nothing}>
-              <slot
-                name="headline"
-                @slotchange=${this.handleHeadlineChange}></slot>
+              <slot name="headline" @slotchange=${this.handleHeadlineChange}></slot>
             </h2>
-            <md-divider></md-divider>
+            <div class="close-button-container" aria-hidden=${!this.hasCloseButton || nothing}>
+              ${this.renderCloseButton()}
+            </div>
           </div>
           <div class="scroller">
             <div class="content">
@@ -264,17 +253,24 @@ export class Dialog extends LitElement {
             </div>
           </div>
           <div class="actions">
-            <md-divider></md-divider>
             <slot name="actions" @slotchange=${this.handleActionsChange}></slot>
           </div>
         </div>
       </dialog>
     `;
   }
+  
+  private renderCloseButton() {
+    return !this.hasCloseButton ? nothing : html`
+      <md-icon-button class="close-button" @click=${this.close}>
+        <md-icon>close</md-icon>
+      </md-icon-button>
+    `;
+  }
 
   protected override firstUpdated() {
     this.intersectionObserver = new IntersectionObserver(
-      (entries) => {
+      entries => {
         for (const entry of entries) {
           this.handleAnchorIntersection(entry);
         }
@@ -296,9 +292,7 @@ export class Dialog extends LitElement {
 
     // Click originated on the backdrop. Native `<dialog>`s will not cancel,
     // but Material dialogs do.
-    const preventDefault = !this.dispatchEvent(
-      new Event('cancel', {cancelable: true}),
-    );
+    const preventDefault = !this.dispatchEvent(new Event('cancel', {cancelable: true}));
     if (preventDefault) {
       return;
     }
@@ -345,14 +339,7 @@ export class Dialog extends LitElement {
       return;
     }
 
-    const {
-      container: containerAnimate,
-      dialog: dialogAnimate,
-      scrim: scrimAnimate,
-      headline: headlineAnimate,
-      content: contentAnimate,
-      actions: actionsAnimate,
-    } = animation;
+    const {container: containerAnimate, dialog: dialogAnimate, scrim: scrimAnimate, headline: headlineAnimate, content: contentAnimate, actions: actionsAnimate} = animation;
 
     const elementAndAnimation: Array<[Element, DialogAnimationArgs[]]> = [
       [dialog, dialogAnimate ?? []],
@@ -370,7 +357,7 @@ export class Dialog extends LitElement {
       }
     }
 
-    await Promise.all(animations.map((animation) => animation.finished));
+    await Promise.all(animations.map(animation => animation.finished));
   }
 
   private handleHeadlineChange(event: Event) {
@@ -381,11 +368,6 @@ export class Dialog extends LitElement {
   private handleActionsChange(event: Event) {
     const slot = event.target as HTMLSlotElement;
     this.hasActions = slot.assignedElements().length > 0;
-  }
-
-  private handleIconChange(event: Event) {
-    const slot = event.target as HTMLSlotElement;
-    this.hasIcon = slot.assignedElements().length > 0;
   }
 
   private handleAnchorIntersection(entry: IntersectionObserverEntry) {
@@ -400,7 +382,7 @@ export class Dialog extends LitElement {
   }
 
   private getIsConnectedPromise() {
-    return new Promise<void>((resolve) => {
+    return new Promise<void>(resolve => {
       this.isConnectedPromiseResolve = resolve;
     });
   }

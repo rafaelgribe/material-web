@@ -34,6 +34,7 @@ $_default: (
 
 @function values($deps: $_default, $exclude-hardcoded-values: false) {
   @return (
+    'action-container-color': map.get($deps, 'md-sys-color', 'secondary-container'),
     'action-focus-label-text-color': map.get($deps, 'md-sys-color', 'primary'),
     'action-focus-state-layer-color': map.get($deps, 'md-sys-color', 'primary'),
     'action-focus-state-layer-opacity':

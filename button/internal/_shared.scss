@@ -12,7 +12,9 @@
 // go/keep-sorted end
 
 @mixin styles() {
-  :host {
+  :host {    
+    letter-spacing: var(--xg-letter-spacing, 0.25px); // Gravity custom style
+
     border-start-start-radius: var(--_container-shape-start-start);
     border-start-end-radius: var(--_container-shape-start-end);
     border-end-start-radius: var(--_container-shape-end-start);
