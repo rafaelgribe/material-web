@@ -53,7 +53,8 @@
       'input-text-prefix-trailing-space': 2px,
       'input-text-suffix-leading-space': 2px,
       // TODO(b/270705687): remove when focus-caret-color token added
-      'focus-caret-color': map.get(tokens.md-sys-color-values-light(), 'primary'),
+      'focus-caret-color':
+        map.get(tokens.md-sys-color-values-light(), 'primary'),
     ),
     $tokens
   );
@@ -64,15 +65,27 @@
     }
 
     // Support logical shape properties
-    --_container-shape-start-start: var(--md-outlined-text-field-container-shape-start-start, var(--_container-shape));
-    --_container-shape-start-end: var(--md-outlined-text-field-container-shape-start-end, var(--_container-shape));
-    --_container-shape-end-end: var(--md-outlined-text-field-container-shape-end-end, var(--_container-shape));
-    --_container-shape-end-start: var(--md-outlined-text-field-container-shape-end-start, var(--_container-shape));
+    --_container-shape-start-start: var(
+      --md-outlined-text-field-container-shape-start-start,
+      var(--_container-shape)
+    );
+    --_container-shape-start-end: var(
+      --md-outlined-text-field-container-shape-start-end,
+      var(--_container-shape)
+    );
+    --_container-shape-end-end: var(
+      --md-outlined-text-field-container-shape-end-end,
+      var(--_container-shape)
+    );
+    --_container-shape-end-start: var(
+      --md-outlined-text-field-container-shape-end-start,
+      var(--_container-shape)
+    );
 
     @include outlined-field.theme(
       (
         // go/keep-sorted start
-        // 'bottom-space': var(--_bottom-space), // Gravity custom style
+        'bottom-space': var(--_bottom-space),
         'container-shape-end-end': var(--_container-shape-end-end),
         'container-shape-end-start': var(--_container-shape-end-start),
         'container-shape-start-end': var(--_container-shape-start-end),
@@ -87,27 +100,36 @@
         'disabled-label-text-color': var(--_disabled-label-text-color),
         'disabled-label-text-opacity': var(--_disabled-label-text-opacity),
         'disabled-leading-content-color': var(--_disabled-leading-icon-color),
-        'disabled-leading-content-opacity': var(--_disabled-leading-icon-opacity),
+        'disabled-leading-content-opacity':
+          var(--_disabled-leading-icon-opacity),
         'disabled-outline-color': var(--_disabled-outline-color),
         'disabled-outline-opacity': var(--_disabled-outline-opacity),
         'disabled-outline-width': var(--_disabled-outline-width),
         'disabled-supporting-text-color': var(--_disabled-supporting-text-color),
-        'disabled-supporting-text-opacity': var(--_disabled-supporting-text-opacity),
+        'disabled-supporting-text-opacity':
+          var(--_disabled-supporting-text-opacity),
         'disabled-trailing-content-color': var(--_disabled-trailing-icon-color),
-        'disabled-trailing-content-opacity': var(--_disabled-trailing-icon-opacity),
+        'disabled-trailing-content-opacity':
+          var(--_disabled-trailing-icon-opacity),
         'error-content-color': var(--_error-input-text-color),
         'error-focus-content-color': var(--_error-focus-input-text-color),
         'error-focus-label-text-color': var(--_error-focus-label-text-color),
-        'error-focus-leading-content-color': var(--_error-focus-leading-icon-color),
+        'error-focus-leading-content-color':
+          var(--_error-focus-leading-icon-color),
         'error-focus-outline-color': var(--_error-focus-outline-color),
-        'error-focus-supporting-text-color': var(--_error-focus-supporting-text-color),
-        'error-focus-trailing-content-color': var(--_error-focus-trailing-icon-color),
+        'error-focus-supporting-text-color':
+          var(--_error-focus-supporting-text-color),
+        'error-focus-trailing-content-color':
+          var(--_error-focus-trailing-icon-color),
         'error-hover-content-color': var(--_error-hover-input-text-color),
         'error-hover-label-text-color': var(--_error-hover-label-text-color),
-        'error-hover-leading-content-color': var(--_error-hover-leading-icon-color),
+        'error-hover-leading-content-color':
+          var(--_error-hover-leading-icon-color),
         'error-hover-outline-color': var(--_error-hover-outline-color),
-        'error-hover-supporting-text-color': var(--_error-hover-supporting-text-color),
-        'error-hover-trailing-content-color': var(--_error-hover-trailing-icon-color),
+        'error-hover-supporting-text-color':
+          var(--_error-hover-supporting-text-color),
+        'error-hover-trailing-content-color':
+          var(--_error-hover-trailing-icon-color),
         'error-label-text-color': var(--_error-label-text-color),
         'error-leading-content-color': var(--_error-leading-icon-color),
         'error-outline-color': var(--_error-outline-color),
@@ -130,12 +152,13 @@
         'label-text-color': var(--_label-text-color),
         'label-text-font': var(--_label-text-font),
         'label-text-line-height': var(--_label-text-line-height),
-        'label-text-populated-line-height': var(--_label-text-populated-line-height),
+        'label-text-populated-line-height':
+          var(--_label-text-populated-line-height),
         'label-text-populated-size': var(--_label-text-populated-size),
         'label-text-size': var(--_label-text-size),
         'label-text-weight': var(--_label-text-weight),
         'leading-content-color': var(--_leading-icon-color),
-        // 'leading-space': var(--_leading-space), // Gravity custom style
+        'leading-space': var(--_leading-space),
         'outline-color': var(--_outline-color),
         'outline-width': var(--_outline-width),
         'supporting-text-color': var(--_supporting-text-color),
@@ -143,9 +166,9 @@
         'supporting-text-line-height': var(--_supporting-text-line-height),
         'supporting-text-size': var(--_supporting-text-size),
         'supporting-text-weight': var(--_supporting-text-weight),
-        // 'top-space': var(--_top-space), // Gravity custom style
+        'top-space': var(--_top-space),
         'trailing-content-color': var(--_trailing-icon-color),
-        // 'trailing-space': var(--_trailing-space), // Gravity custom style
+        'trailing-space': var(--_trailing-space),
         // go/keep-sorted end
       )
     );

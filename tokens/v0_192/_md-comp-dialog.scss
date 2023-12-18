@@ -118,8 +118,6 @@ $_default: (
           ) map.get($deps, 'md-sys-typescale', 'body-medium-font')
       ),
     'supporting-text-weight':
-      map.get($deps, 'md-sys-typescale', 'body-medium-weight'),
-    'with-icon-icon-color': map.get($deps, 'md-sys-color', 'secondary'),
-    'with-icon-icon-size': if($exclude-hardcoded-values, null, 24px)
+      map.get($deps, 'md-sys-typescale', 'body-medium-weight')
   );
 }

@@ -26,8 +26,6 @@ $supported-tokens: (
   'headline-line-height',
   'headline-size',
   'headline-weight',
-  'icon-color',
-  'icon-size',
   'supporting-text-color',
   'supporting-text-font',
   'supporting-text-line-height',
@@ -77,12 +75,7 @@ $unsupported-tokens: (
   $tokens: values.validate(
     md-comp-dialog.values($deps, $exclude-hardcoded-values),
     $supported-tokens: $supported-tokens,
-    $unsupported-tokens: $unsupported-tokens,
-    $renamed-tokens: (
-      // Remove "with-*" prefixes (b/273534858)
-      'with-icon-icon-color': 'icon-color',
-      'with-icon-icon-size': 'icon-size'
-    )
+    $unsupported-tokens: $unsupported-tokens
   );
 
   @return $tokens;

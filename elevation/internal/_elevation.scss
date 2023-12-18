@@ -15,7 +15,7 @@
   $supported-tokens: tokens.$md-comp-elevation-supported-tokens;
 
   @each $token, $value in $tokens {
-    @if list.index($supported-tokens, $token) ==null {
+    @if list.index($supported-tokens, $token) == null {
       @error 'Token `#{$token}` is not a supported token.';
     }
 
@@ -39,8 +39,7 @@
 
   :host,
   .shadow,
-  .shadow::before,
-  .shadow::after {
+  .shadow::before {
     border-radius: inherit;
     inset: 0;
     position: absolute;
@@ -49,8 +48,7 @@
     transition-timing-function: inherit;
   }
 
-  .shadow::before,
-  .shadow::after {
+  .shadow::before {
     content: '';
     transition-property: box-shadow, opacity;
   }
@@ -74,7 +72,7 @@
 
     $opacity: calc((max(15 - ($x / (72778800 * ($x - 3) - 1)), $x * (-1 + $x))) / 100);
 
-    box-shadow: 0px $y-px $blur-px 0px #000;
+    box-shadow: 0px $y-px $blur-px 0px var(--_shadow-color);
     opacity: $opacity;
   }
 }
